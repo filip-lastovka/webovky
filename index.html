@@ -47,7 +47,75 @@
 
         <input type="radio" id="checkRenegadeRaider" name="question3" value="RenegadeRaider"/>
         <label for="checkRenegadeRaider">Renegade Raider</label><br/>
+  <br/>
+        <h3><strong>4. otázka: Co Ninja draguje?</strong></h3>
 
+        <input type="checkbox" id="lowTaperFade" name="question4" value="LowTaperFade"/>
+        <label for="lowTaperFade">Low Taper Fade</label><br/>
+
+        <input type="checkbox" id="goodLookinSong" name="question4" value="GoodLookinSong"/>
+        <label for="goodLookinSong">Píseň: Good Lookin‘</label><br/>
+
+        <input type="checkbox" id="fortniteSkin" name="question4" value="FortniteSkin"/>
+        <label for="fortniteSkin">Jeho Fortnite skin</label><br/>
+
+        <br/>
+        <button type="button" onclick="checkAnswers()">Zkontrolovat odpovědi</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function checkAnswers() {
+            // Správné odpovědi
+            const correctAnswers = {
+                question1: "JohnPork",
+                question2: "KingVon",
+                question3: "RenegadeRaider",
+                question4: ["LowTaperFade", "GoodLookinSong"]
+            };
+
+            let score = 0;
+
+            // Kontrola odpovědí pro každou otázku
+            // 1. otázka
+            const question1 = document.querySelector('input[name="question1"]:checked');
+            if (question1 && question1.value === correctAnswers.question1) {
+                score++;
+            }
+
+            // 2. otázka
+            const question2 = document.querySelector('input[name="question2"]:checked');
+            if (question2 && question2.value === correctAnswers.question2) {
+                score++;
+            }
+
+            // 3. otázka
+            const question3 = document.querySelector('input[name="question3"]:checked');
+            if (question3 && question3.value === correctAnswers.question3) {
+                score++;
+            }
+
+            // 4. otázka
+            const question4 = [];
+            document.querySelectorAll('input[name="question4"]:checked').forEach(checkbox => {
+                question4.push(checkbox.value);
+            });
+            if (JSON.stringify(question4.sort()) === JSON.stringify(correctAnswers.question4.sort())) {
+                score++;
+            }
+
+            // Zobrazení výsledků
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `Tvé skóre je ${score} z 4.`;
+
+        
+            if (score === 4) {
+                resultDiv.innerHTML += "<p>brain rot level 100%</p>";
+            } else {
+                resultDiv.innerHTML += "<p>ez nooooooooooooooooooob</p>";
+            }
+        }
     </script>
 </body>
 </html>
